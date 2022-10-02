@@ -17,9 +17,11 @@ import {
 } from '@expo-google-fonts/archivo';
 
 import { Home } from './src/screens/Home';
-import { CarDetail } from '@screens/CarDetail';
+import { CarDetail } from '@screens/CarDetails';
 
 import theme from './src/theme';
+import { Scheduling } from '@screens/Scheduling';
+import { SchedulingDetails } from '@screens/SchedulingDetails';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -40,7 +42,7 @@ export default function App() {
         translucent
       />
 
-      {fontsLoaded ? <CarDetail /> : <ActivityIndicator size="large" color="#00ff00" />}
+      {fontsLoaded ? <SchedulingDetails /> : <ActivityIndicator size="large" color="#00ff00" />}
 
     </ThemeProvider>
   );
