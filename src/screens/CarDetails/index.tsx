@@ -1,3 +1,5 @@
+import { useNavigation } from "@react-navigation/native";
+
 import { Accessory } from '@components/Accessory';
 import { BackButton } from '@components/BackButton';
 import { Button } from '@components/Button';
@@ -13,7 +15,13 @@ import forceSvg from '@assets/force.svg';
 import peopleSvg from '@assets/people.svg';
 
 
-export function CarDetail() {
+export function CarDetails() {
+    const navigation = useNavigation();
+
+    function handleConfirmRental() {
+        navigation.navigate('scheduling')
+    }
+
     return (
         <Container>
             <Header>
@@ -58,7 +66,8 @@ export function CarDetail() {
 
             <Footer>
                 <Button
-                    title='Confirmar'
+                    title='Escolher período do aluguel'
+                    onPress={handleConfirmRental}
                 />
             </Footer>
         </Container>

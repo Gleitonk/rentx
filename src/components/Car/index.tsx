@@ -12,6 +12,7 @@ import {
 } from './styles';
 
 import GasolineSvg from '@assets/gasoline.svg'
+import { TouchableOpacityProps } from 'react-native';
 
 type CarData = {
     brand: string;
@@ -23,13 +24,13 @@ type CarData = {
     thumbnail: string;
 }
 
-type Props = {
+type Props = TouchableOpacityProps & {
     data: CarData;
 }
 
-export function Car({ data }: Props) {
+export function Car({ data, ...rest }: Props) {
     return (
-        <Container>
+        <Container {...rest}>
             <Details>
                 <Brand>{data.brand}</Brand>
                 <Name>{data.name}</Name>
@@ -49,7 +50,7 @@ export function Car({ data }: Props) {
 
             <CarImage
                 source={{ uri: data.thumbnail }}
-                // resizeMode='contain'
+                resizeMode='contain'
             />
 
 

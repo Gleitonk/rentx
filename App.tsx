@@ -1,8 +1,10 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
 import { ThemeProvider } from 'styled-components/native';
 import { ActivityIndicator } from "react-native";
+
+import { Routes } from './src/routes';
 
 import {
   useFonts,
@@ -16,12 +18,8 @@ import {
   Archivo_600SemiBold
 } from '@expo-google-fonts/archivo';
 
-import { Home } from './src/screens/Home';
-import { CarDetail } from '@screens/CarDetails';
-
 import theme from './src/theme';
-import { Scheduling } from '@screens/Scheduling';
-import { SchedulingDetails } from '@screens/SchedulingDetails';
+
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -36,13 +34,14 @@ export default function App() {
     <ThemeProvider
       theme={theme}
     >
+
       <StatusBar
-        barStyle={'light-content'}
-        backgroundColor={'transparent'}
+        style="light"
+        backgroundColor='transparent'
         translucent
       />
 
-      {fontsLoaded ? <SchedulingDetails /> : <ActivityIndicator size="large" color="#00ff00" />}
+      {fontsLoaded ? <Routes /> : <ActivityIndicator size="large" color="#00ff00" />}
 
     </ThemeProvider>
   );

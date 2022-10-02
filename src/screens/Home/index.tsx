@@ -1,5 +1,8 @@
 import React from 'react';
 import { FlatList } from 'react-native';
+
+import { useNavigation } from "@react-navigation/native";
+
 import { RFValue } from 'react-native-responsive-fontsize';
 
 import { Container, Header, HeaderContent, TotalCars } from './styles';
@@ -7,6 +10,8 @@ import Logo from '@assets/logo.svg';
 import { Car } from '@components/Car';
 
 export function Home() {
+    const navigation = useNavigation();
+
     const carData = {
         brand: 'AUDI',
         name: 'RS 6 AVANT',
@@ -26,6 +31,12 @@ export function Home() {
         },
         thumbnail: 'https://di-uploads-pod15.dealerinspire.com/rusnakwestlakeporsche/uploads/2019/07/2019PRC010464_640_01.png',
     }
+
+    function handleCarDetails() {
+        navigation.navigate('carDetails')
+    }
+
+
     return (
         <Container >
 
@@ -48,6 +59,7 @@ export function Home() {
                 renderItem={(item) => (
                     <Car
                         data={carData}
+                        onPress={handleCarDetails}
                     />
                 )}
                 contentContainerStyle={{ padding: 24, paddingBottom: 150 }}

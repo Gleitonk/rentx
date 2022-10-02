@@ -1,3 +1,5 @@
+import { useNavigation } from "@react-navigation/native";
+
 import { Feather } from '@expo/vector-icons';
 
 import { Accessory } from '@components/Accessory';
@@ -19,6 +21,12 @@ import { useTheme } from 'styled-components/native';
 
 export function SchedulingDetails() {
     const theme = useTheme();
+    const navigation = useNavigation();
+
+    function handleCompleteRental() {
+        navigation.navigate('schedulingComplete')
+    }
+
     return (
         <Container>
             <Header>
@@ -99,6 +107,7 @@ export function SchedulingDetails() {
                 <Button
                     title='Alugar agora'
                     color={theme.colors.success}
+                    onPress={handleCompleteRental}
                 />
             </Footer>
         </Container>
