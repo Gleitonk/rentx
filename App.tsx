@@ -17,6 +17,8 @@ import {
 } from '@expo-google-fonts/archivo';
 
 import { Home } from './src/screens/Home';
+import { CarDetail } from '@screens/CarDetail';
+
 import theme from './src/theme';
 
 export default function App() {
@@ -38,7 +40,7 @@ export default function App() {
         translucent
       />
 
-      {fontsLoaded ? <Home /> : <ActivityIndicator size="large" color="#00ff00" />}
+      {fontsLoaded ? <CarDetail /> : <ActivityIndicator size="large" color="#00ff00" />}
 
     </ThemeProvider>
   );
