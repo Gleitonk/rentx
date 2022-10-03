@@ -27,11 +27,15 @@ export function SchedulingDetails() {
         navigation.navigate('schedulingComplete')
     }
 
+    function handleGoBack() {
+        navigation.goBack();
+    }
+
     return (
         <Container>
             <Header>
                 <BackButton
-                    onPress={() => { }}
+                    onPress={handleGoBack}
                 />
             </Header>
 

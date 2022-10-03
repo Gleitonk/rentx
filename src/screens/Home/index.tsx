@@ -1,45 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FlatList } from 'react-native';
 
 import { useNavigation } from "@react-navigation/native";
 
 import { RFValue } from 'react-native-responsive-fontsize';
 
-import { Container, Header, HeaderContent, TotalCars } from './styles';
+import { CarList, Container, Header, HeaderContent, TotalCars } from './styles';
 import Logo from '@assets/logo.svg';
+
 import { Car } from '@components/Car';
+import { Loading } from '@components/Loading';
+
+import { api } from '@services/api';
+
+import { CarDTO } from '@dtos/CarDTO';
 
 export function Home() {
     const navigation = useNavigation();
 
-    const carData = {
-        brand: 'AUDI',
-        name: 'RS 6 AVANT',
-        rent: {
-            period: 'AO DIA',
-            price: 520,
-        },
-        thumbnail: 'https://www.pngmart.com/files/22/Audi-RS6-PNG-Pic.png',
+    const [cars, setCars] = useState<CarDTO[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+
+    function handleCarDetails(car: CarDTO) {
+        navigation.navigate('carDetails', { car })
     }
 
-    const carData2 = {
-        brand: 'PORCHE',
-        name: '911 GT3 RS',
-        rent: {
-            period: 'AO DIA',
-            price: 520,
-        },
-        thumbnail: 'https://di-uploads-pod15.dealerinspire.com/rusnakwestlakeporsche/uploads/2019/07/2019PRC010464_640_01.png',
-    }
 
-    function handleCarDetails() {
-        navigation.navigate('carDetails')
-    }
 
+    useEffect(() => {
+        async function fetchCars() {
+            try {
+                const response = await api.get('/cars')
+                setCars(response.data);
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        fetchCars()
+    }, [])
 
     return (
         <Container >
-
             <Header>
                 <HeaderContent>
                     <Logo
@@ -53,19 +57,20 @@ export function Home() {
                 </HeaderContent>
             </Header>
 
-            <FlatList
-                data={[1, 2, 3, 4, 5, 6, 7]}
-                keyExtractor={item => String(item)}
-                renderItem={(item) => (
-                    <Car
-                        data={carData}
-                        onPress={handleCarDetails}
-                    />
-                )}
-                contentContainerStyle={{ padding: 24, paddingBottom: 150 }}
-                showsVerticalScrollIndicator={false}
-            />
 
+            {isLoading ? <Loading /> :
+                <CarList
+                    data={cars}
+                    keyExtractor={item => item.id}
+                    renderItem={(item) => (
+                        < Car
+                            data={item.item}
+                            onPress={() => handleCarDetails(item.item)}
+                        />
+                    )}
+
+                />
+            }
         </Container>
     );
 }

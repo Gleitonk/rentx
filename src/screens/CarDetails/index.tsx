@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { Accessory } from '@components/Accessory';
 import { BackButton } from '@components/BackButton';
@@ -13,26 +13,41 @@ import gasolineSvg from '@assets/gasoline.svg';
 import exchangeSvg from '@assets/exchange.svg';
 import forceSvg from '@assets/force.svg';
 import peopleSvg from '@assets/people.svg';
+import { CarDTO } from "@dtos/CarDTO";
+import { getAccessoryIcon } from "@utils/getAccessoryIcon";
 
+type Params = {
+    car: CarDTO;
+}
 
 export function CarDetails() {
     const navigation = useNavigation();
+
+    const route = useRoute();
+
+    const { car } = route.params as Params;
 
     function handleConfirmRental() {
         navigation.navigate('scheduling')
     }
 
+    function handleGoBack() {
+        navigation.goBack();
+    }
+
+
+
     return (
         <Container>
             <Header>
                 <BackButton
-                    onPress={() => { }}
+                    onPress={handleGoBack}
                 />
             </Header>
 
             <CarImages>
                 <ImageSlider
-                    imageUrl={['https://di-uploads-pod15.dealerinspire.com/rusnakwestlakeporsche/uploads/2019/07/2019PRC010464_640_01.png']}
+                    imageUrl={car.photos}
                 />
             </CarImages>
 
@@ -40,27 +55,31 @@ export function CarDetails() {
             <Content>
                 <Details>
                     <Description>
-                        <Brand>Lamborghini</Brand>
-                        <Name>Huracan</Name>
+                        <Brand>{car.brand}</Brand>
+                        <Name>{car.name}</Name>
                     </Description>
 
                     <Rent>
-                        <Period>Ao dia</Period>
-                        <Price>R$ 580</Price>
+                        <Period>{car.rent.period}</Period>
+                        <Price>R$ {car.rent.price}</Price>
                     </Rent>
                 </Details>
 
                 <Accessories>
-                    <Accessory icon={speedSvg} name="380Km/h" />
-                    <Accessory icon={accelerationSvg} name="3.2s" />
-                    <Accessory icon={forceSvg} name="800 HP" />
-                    <Accessory icon={gasolineSvg} name="Gasolina" />
-                    <Accessory icon={exchangeSvg} name="Auto" />
-                    <Accessory icon={peopleSvg} name="2 pessoas" />
+                    {
+                        car.accessories.map(accessory => (
+                            <Accessory
+                                key={accessory.type}
+                                name={accessory.name}
+                                icon={getAccessoryIcon(accessory.type)}
+                            />
+                        ))
+                    }
+
                 </Accessories>
 
                 <About>
-                    Athletes know: top performance requires more than perfect conditions and luck. Relentless training to become stronger and faster.
+                    {car.about}
                 </About>
             </Content>
 

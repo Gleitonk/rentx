@@ -16,8 +16,14 @@
       "@storage/*": [
         "./src/storage/*"
       ],
+      "@services/*": [
+        "./src/services/*"
+      ],
       "@utils/*": [
         "./src/utils/*"
+      ],
+      "@dtos/*": [
+        "./src/dtos/*"
       ]
     }
   }

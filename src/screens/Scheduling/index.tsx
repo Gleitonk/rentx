@@ -16,11 +16,15 @@ export function Scheduling() {
         navigation.navigate('schedulingDetails');
     }
     
+    function handleGoBack() {
+        navigation.goBack();
+    }
+
     return (
         <Container>
             <Header>
                 <BackButton
-                    onPress={() => { }}
+                    onPress={handleGoBack}
                     color={theme.colors.shape}
                 />
 
