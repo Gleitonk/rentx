@@ -7,12 +7,6 @@ import { ImageSlider } from '@components/ImageSlider';
 
 import { About, Accessories, Brand, CarImages, Container, Content, Description, Details, Footer, Header, Name, Period, Price, Rent } from './styles';
 
-import speedSvg from '@assets/speed.svg';
-import accelerationSvg from '@assets/acceleration.svg';
-import gasolineSvg from '@assets/gasoline.svg';
-import exchangeSvg from '@assets/exchange.svg';
-import forceSvg from '@assets/force.svg';
-import peopleSvg from '@assets/people.svg';
 import { CarDTO } from "@dtos/CarDTO";
 import { getAccessoryIcon } from "@utils/getAccessoryIcon";
 
@@ -28,14 +22,12 @@ export function CarDetails() {
     const { car } = route.params as Params;
 
     function handleConfirmRental() {
-        navigation.navigate('scheduling')
+        navigation.navigate('scheduling', { car });
     }
 
     function handleGoBack() {
         navigation.goBack();
     }
-
-
 
     return (
         <Container>
