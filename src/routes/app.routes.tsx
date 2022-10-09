@@ -8,15 +8,21 @@ import { Scheduling } from '@screens/Scheduling';
 import { SchedulingDetails } from '@screens/SchedulingDetails';
 import { SchedulingComplete } from '@screens/SchedulingComplete';
 import { MyCars } from '@screens/MyCars';
+import { SingIn } from '@screens/SingIn';
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
 export function AppRoutes() {
     return (
-        <Navigator screenOptions={{ headerShown: false }} initialRouteName='splash'>
-            <Screen
+        <Navigator screenOptions={{ headerShown: false }} initialRouteName='singin'>
+            {/* <Screen
                 name="splash"
                 component={Splash}
+            /> */}
+          
+            <Screen
+                name="singin"
+                component={SingIn}
             />
 
             <Screen

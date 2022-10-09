@@ -7,12 +7,11 @@ import { Container, Title } from './styles';
 type Props = TouchableOpacityProps & {
     title: string;
     color?: string;
-    onPress: () => void;
-    disabled?: boolean;
+    light?: boolean;
     loading?: boolean;
 }
 
-export function Button({ title, color, onPress, disabled = false, loading = false, ...rest }: Props) {
+export function Button({ title, color, light = false, onPress, disabled = false, loading = false, ...rest }: Props) {
     const theme = useTheme();
 
     return (
@@ -28,7 +27,11 @@ export function Button({ title, color, onPress, disabled = false, loading = fals
                     color={theme.colors.shape}
                     style={{ padding: 2 }}
                 /> :
-                <Title>{title}</Title>
+                <Title
+                    light={light}
+                >
+                    {title}
+                </Title>
             }
         </Container >
     );

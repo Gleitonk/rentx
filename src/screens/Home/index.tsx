@@ -38,7 +38,7 @@ export function Home() {
                 { translateY: positionY.value }
             ]
         }
-    })
+    });
 
     const onGestureEvent = useAnimatedGestureHandler({
         onStart: (_, context: any) => {
@@ -53,8 +53,7 @@ export function Home() {
             positionX.value = withSpring(0);
             positionY.value = withSpring(0);
         }
-
-    })
+    });
 
     function handleCarDetails(car: CarDTO) {
         navigation.navigate('carDetails', { car });
@@ -112,7 +111,7 @@ export function Home() {
             }
 
             <PanGestureHandler
-            onGestureEvent={onGestureEvent}
+                onGestureEvent={onGestureEvent}
             >
                 <Animated.View
                     style={[
