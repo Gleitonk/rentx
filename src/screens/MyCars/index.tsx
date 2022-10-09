@@ -7,7 +7,6 @@ import { AntDesign } from '@expo/vector-icons'
 
 import { BackButton } from '@components/BackButton';
 import { Car } from '@components/Car';
-import { Loading } from '@components/Loading';
 import { LoadAnimation } from '@components/LoadAnimation';
 
 import { CarDTO } from '@dtos/CarDTO';

@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { useNavigation, useRoute } from "@react-navigation/native";
 import Animated, { Extrapolate, interpolate, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue } from "react-native-reanimated";
-import { useTheme } from 'styled-components/native';
 
+import { useTheme } from 'styled-components/native';
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 import { Accessory } from '@components/Accessory';
@@ -105,8 +105,8 @@ export function CarDetails() {
                     </Description>
 
                     <Rent>
-                        <Period>{car.rent.period}</Period>
-                        <Price>R$ {car.rent.price}</Price>
+                        <Period>{car.period}</Period>
+                        <Price>R$ {car.price}</Price>
                     </Rent>
                 </Details>
 

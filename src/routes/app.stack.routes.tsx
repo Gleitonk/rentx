@@ -1,36 +1,22 @@
 import React from 'react';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { Splash } from '@screens/Splash';
 import { Home } from '@screens/Home';
 import { CarDetails } from '@screens/CarDetails';
 import { Scheduling } from '@screens/Scheduling';
 import { SchedulingDetails } from '@screens/SchedulingDetails';
-import { SchedulingComplete } from '@screens/SchedulingComplete';
+import { Confirmation } from '@screens/Confirmation';
 import { MyCars } from '@screens/MyCars';
-import { SingIn } from '@screens/SingIn';
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
-export function AppRoutes() {
+export function AppStackRoutes() {
     return (
-        <Navigator screenOptions={{ headerShown: false }} initialRouteName='singin'>
-            {/* <Screen
-                name="splash"
-                component={Splash}
-            /> */}
-          
-            <Screen
-                name="singin"
-                component={SingIn}
-            />
+        <Navigator screenOptions={{ headerShown: false }} initialRouteName='home'>
 
             <Screen
                 name="home"
                 component={Home}
-                options={{
-                    gestureEnabled: false
-                }}
             />
 
             <Screen
@@ -49,8 +35,8 @@ export function AppRoutes() {
             />
 
             <Screen
-                name="schedulingComplete"
-                component={SchedulingComplete}
+                name="confirmation"
+                component={Confirmation}
             />
 
             <Screen

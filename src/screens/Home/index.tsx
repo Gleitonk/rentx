@@ -4,22 +4,20 @@ import { useNavigation } from "@react-navigation/native";
 import { useTheme } from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
-import Animated, { useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
-import { RectButton, TouchableOpacity, PanGestureHandler } from 'react-native-gesture-handler';
-
-const ButtonAnimated = Animated.createAnimatedComponent(RectButton);
-
 import { CarList, Container, Header, HeaderContent, TotalCars } from './styles';
 import Logo from '@assets/logo.svg';
-import { Ionicons } from "@expo/vector-icons";
 
 import { Car } from '@components/Car';
-import { Loading } from '@components/Loading';
 import { LoadAnimation } from '@components/LoadAnimation';
 
 import { api } from '@services/api';
 
 import { CarDTO } from '@dtos/CarDTO';
+
+// import { Ionicons } from "@expo/vector-icons";
+// import Animated, { useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+// const ButtonAnimated = Animated.createAnimatedComponent(RectButton);
+// import { RectButton, PanGestureHandler } from 'react-native-gesture-handler';
 
 export function Home() {
     const navigation = useNavigation();
@@ -28,40 +26,41 @@ export function Home() {
     const [cars, setCars] = useState<CarDTO[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const positionX = useSharedValue(0);
-    const positionY = useSharedValue(0);
-
-    const myCarsButtonStyle = useAnimatedStyle(() => {
-        return {
-            transform: [
-                { translateX: positionX.value },
-                { translateY: positionY.value }
-            ]
-        }
-    });
-
-    const onGestureEvent = useAnimatedGestureHandler({
-        onStart: (_, context: any) => {
-            context.positionX = positionX.value;
-            context.positionY = positionY.value;
-        },
-        onActive: (event, context: any) => {
-            positionX.value = event.translationX;
-            positionY.value = event.translationY;
-        },
-        onEnd: (event) => {
-            positionX.value = withSpring(0);
-            positionY.value = withSpring(0);
-        }
-    });
-
-    function handleCarDetails(car: CarDTO) {
+        function handleCarDetails(car: CarDTO) {
         navigation.navigate('carDetails', { car });
     }
 
-    function handleOpenMyCars() {
-        navigation.navigate('myCars');
-    }
+    // const positionX = useSharedValue(0);
+    // const positionY = useSharedValue(0);
+
+    // const myCarsButtonStyle = useAnimatedStyle(() => {
+    //     return {
+    //         transform: [
+    //             { translateX: positionX.value },
+    //             { translateY: positionY.value }
+    //         ]
+    //     }
+    // });
+
+    // const onGestureEvent = useAnimatedGestureHandler({
+    //     onStart: (_, context: any) => {
+    //         context.positionX = positionX.value;
+    //         context.positionY = positionY.value;
+    //     },
+    //     onActive: (event, context: any) => {
+    //         positionX.value = event.translationX;
+    //         positionY.value = event.translationY;
+    //     },
+    //     onEnd: (event) => {
+    //         positionX.value = withSpring(0);
+    //         positionY.value = withSpring(0);
+    //     }
+    // });
+
+
+    // function handleOpenMyCars() {
+    //     navigation.navigate('myCars');
+    // }
 
     useEffect(() => {
         async function fetchCars() {
@@ -110,7 +109,7 @@ export function Home() {
                 />
             }
 
-            <PanGestureHandler
+            {/* <PanGestureHandler
                 onGestureEvent={onGestureEvent}
             >
                 <Animated.View
@@ -134,7 +133,7 @@ export function Home() {
                         />
                     </ButtonAnimated>
                 </Animated.View>
-            </PanGestureHandler>
+            </PanGestureHandler> */}
         </Container>
     );
 }

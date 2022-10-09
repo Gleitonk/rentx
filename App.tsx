@@ -21,6 +21,7 @@ import {
 } from '@expo-google-fonts/archivo';
 
 import theme from './src/theme';
+import { AppProvider } from '@hooks/index';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -31,21 +32,31 @@ export default function App() {
     Archivo_600SemiBold
   });
 
+  if (!fontsLoaded) {
+    return (
+      <ActivityIndicator size="large" color={theme.colors.main}
+        style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: theme.colors.header }}
+      />
+    )
+  }
+
   return (
     <ThemeProvider
       theme={theme}
     >
-      <GestureHandlerRootView style={{ flex: 1 }}>
+      <AppProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
 
-        <StatusBar
-          style="light"
-          backgroundColor='transparent'
-          translucent
-        />
+          <StatusBar
+            style="light"
+            backgroundColor='transparent'
+            translucent
+          />
 
-        {fontsLoaded ? <Routes /> : <ActivityIndicator size="large" color="#00ff00" />}
+          <Routes />
 
-      </GestureHandlerRootView>
+        </GestureHandlerRootView>
+      </AppProvider>
     </ThemeProvider>
   );
 }

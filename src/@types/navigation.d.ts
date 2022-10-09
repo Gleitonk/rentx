@@ -16,8 +16,21 @@ export declare global {
                 car: carDTO,
                 dates: string[]
             };
-            schedulingComplete: undefined;
+            confirmation: {
+                title: string;
+                message: string;
+                nextScreenRoute: string;
+            };
             myCars: undefined;
+            signin: undefined;
+            signupfirststep: undefined;
+            signupsecondstep: {
+                user: {
+                    name: string;
+                    email: string;
+                    drivingLicense: string;
+                }
+            };
         }
     }
 

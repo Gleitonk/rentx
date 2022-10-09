@@ -40,7 +40,7 @@ export function Splash() {
     });
 
     function startApp() {
-        navigation.navigate('home');
+        navigation.navigate('signin');
     }
 
     useEffect(() => {

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Alert, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '@hooks/auth';
+
 import * as Yup from "yup";
 
 import { StatusBar } from 'expo-status-bar';
@@ -11,12 +14,15 @@ import { useTheme } from 'styled-components/native';
 import { Input } from '@components/Input';
 import { PasswordInput } from '@components/PasswordInput';
 
-export function SingIn() {
+export function SignIn() {
     const theme = useTheme();
+    const navigation = useNavigation();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+
+    const { signIn } = useAuth();
 
     async function handleSignIn() {
         try {
@@ -30,7 +36,7 @@ export function SingIn() {
 
             await schema.validate({ email, password });
 
-
+            signIn({ email, password });
         } catch (error) {
             if (error instanceof Yup.ValidationError) {
                 return Alert.alert('Ops', error.message)
@@ -42,14 +48,14 @@ export function SingIn() {
         }
     }
 
+    function handleNewAccount() {
+        navigation.navigate('signupfirststep');
+    }
+
     return (
-        <KeyboardAvoidingView
-            behavior='position'
-            enabled
-        >
-            <TouchableWithoutFeedback
-                onPress={Keyboard.dismiss}
-            >
+        <KeyboardAvoidingView behavior='position' enabled>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+
                 <Container>
 
                     <StatusBar
@@ -73,9 +79,7 @@ export function SingIn() {
 
                     </Header>
 
-
                     <Form>
-
                         <Input
                             iconName='mail'
                             placeholder='E-mail'
@@ -93,12 +97,9 @@ export function SingIn() {
                             onChangeText={setPassword}
                             value={password}
                         />
-
                     </Form>
 
-
                     <Footer>
-
                         <Button
                             title='Login'
                             onPress={handleSignIn}
@@ -110,10 +111,9 @@ export function SingIn() {
                             color={theme.colors.background_secondary}
                             light
                             title='Criar conta gratuita'
-                            onPress={() => { }}
+                            onPress={handleNewAccount}
                             disabled={false}
                         />
-
                     </Footer>
 
                 </Container>
