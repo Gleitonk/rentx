@@ -28,6 +28,9 @@
       ],
       "@hooks/*": [
         "./src/hooks/*"
+      ],
+      "@database/*": [
+        "./src/database/*"
       ]
     }
   }

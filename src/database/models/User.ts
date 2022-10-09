@@ -14,7 +14,7 @@ class User extends Model {
     email!: string;
 
     @field('driver_license')
-    ndriver_licenseame!: string;
+    driver_license!: string;
 
     @field('avatar')
     avatar!: string;

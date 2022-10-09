@@ -26,7 +26,7 @@ export function Home() {
     const [cars, setCars] = useState<CarDTO[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
-        function handleCarDetails(car: CarDTO) {
+    function handleCarDetails(car: CarDTO) {
         navigation.navigate('carDetails', { car });
     }
 
@@ -63,17 +63,28 @@ export function Home() {
     // }
 
     useEffect(() => {
+        let isMounted = true;
+
         async function fetchCars() {
             try {
-                const response = await api.get('/cars')
-                setCars(response.data);
+                const response = await api.get('/cars');
+                if (isMounted) {
+                    setCars(response.data);
+                }
+
             } catch (error) {
                 console.log(error);
             } finally {
-                setIsLoading(false);
+                if (isMounted) {
+                    setIsLoading(false);
+                }
             }
         }
-        fetchCars()
+        fetchCars();
+
+        return () => {
+            isMounted = false;
+        }
     }, [])
 
     return (

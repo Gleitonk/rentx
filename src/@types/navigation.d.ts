@@ -30,7 +30,8 @@ export declare global {
                     email: string;
                     drivingLicense: string;
                 }
-            };
+            },
+            profile: undefined;
         }
     }
 
