@@ -8,11 +8,11 @@ import { AntDesign } from '@expo/vector-icons'
 import { BackButton } from '@components/BackButton';
 import { Car } from '@components/Car';
 import { Loading } from '@components/Loading';
+import { LoadAnimation } from '@components/LoadAnimation';
 
 import { CarDTO } from '@dtos/CarDTO';
 
 import { api } from '@services/api';
-
 
 import { Appointments, AppointmentsQuantity, AppointmentsTitle, CarFooter, CarFooterDate, CarFooterPeriod, CarFooterTitle, CarWrapper, Container, Content, EmptyContainer, Header, Subtitle, Title } from './styles';
 import { ListEmpty } from '@components/ListEmpty';
@@ -68,7 +68,7 @@ export function MyCars() {
                 </Subtitle>
             </Header>
 
-            {isLoading ? <Loading /> :
+            {isLoading ? <LoadAnimation /> :
 
                 <Content>
                     <Appointments>
@@ -103,8 +103,8 @@ export function MyCars() {
                         ListEmptyComponent={() => (
                             <EmptyContainer>
                                 <ListEmpty
-                                message="Não há agendamentos."
-                            />
+                                    message="Não há agendamentos."
+                                />
                             </EmptyContainer>
                         )}
 

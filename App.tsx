@@ -1,6 +1,8 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 import { ThemeProvider } from 'styled-components/native';
 import { ActivityIndicator } from "react-native";
 
@@ -20,7 +22,6 @@ import {
 
 import theme from './src/theme';
 
-
 export default function App() {
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
@@ -34,15 +35,17 @@ export default function App() {
     <ThemeProvider
       theme={theme}
     >
+      <GestureHandlerRootView style={{ flex: 1 }}>
 
-      <StatusBar
-        style="light"
-        backgroundColor='transparent'
-        translucent
-      />
+        <StatusBar
+          style="light"
+          backgroundColor='transparent'
+          translucent
+        />
 
-      {fontsLoaded ? <Routes /> : <ActivityIndicator size="large" color="#00ff00" />}
+        {fontsLoaded ? <Routes /> : <ActivityIndicator size="large" color="#00ff00" />}
 
+      </GestureHandlerRootView>
     </ThemeProvider>
   );
 }

@@ -22,6 +22,9 @@ export function AppRoutes() {
             <Screen
                 name="home"
                 component={Home}
+                options={{
+                    gestureEnabled: false
+                }}
             />
 
             <Screen
